@@ -9,6 +9,7 @@ RUN npm install
 COPY . .
 
 RUN npm run build
+RUN npx sequelize db:create
 
 EXPOSE 3001
 

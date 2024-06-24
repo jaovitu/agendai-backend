@@ -7,10 +7,15 @@ services:
       - '3001:3001'
     container_name: agendai-backend
     environment:
-      - MYSQL_USER=agendai
-      - MYSQL_PASSWORD=agendai#password
-      - MYSQL_DATABASE=agendai
-      - MYSQL_HOST=mysql-dev
+      - MYSQL_USER_DEV=agendai
+      - MYSQL_PASSWORD_DEV=agendai#password
+      - MYSQL_DATABASE_DEV=agendai
+      - MYSQL_HOST_DEV=mysql-dev
+
+      - MYSQL_USER_TEST=agendai-test
+      - MYSQL_PASSWORD_TEST=agendai#password#test
+      - MYSQL_DATABASE_TEST=agendai-test
+      - MYSQL_HOST_TEST=mysql-dev-test
     volumes:
       - .:/agendai-backend
       - /agendai-backend/node_modules
