@@ -1,5 +1,6 @@
 export const internalErrosCode = {
   validationErrorCode: 1001,
   authenticationError: 1002,
-  schemaValidationError: 1003
+  schemaValidationError: 1003,
+  emailAlreadyInUseError: 1004
 };

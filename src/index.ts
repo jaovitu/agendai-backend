@@ -4,6 +4,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { errorMiddleware } from './app/middlewares/error-middleware';
 import { customLOG } from './app/utils/custom-log';
+import { usersRoutes } from './app/routes/users-routes';
 
 dotenv.config();
 const app = express();
@@ -13,6 +14,8 @@ process.env.TZ = 'America/Sao_Paulo';
 
 app.use(cors());
 app.use(express.json());
+
+app.use(usersRoutes);
 
 app.use(errorMiddleware);
 

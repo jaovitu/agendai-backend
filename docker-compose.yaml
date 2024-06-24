@@ -1,27 +1,27 @@
 version: '3.9'
 
 services:
-  app:
-    build: ./
-    ports:
-      - '3001:3001'
-    container_name: agendai-backend
-    environment:
-      - MYSQL_USER_DEV=agendai
-      - MYSQL_PASSWORD_DEV=agendai#password
-      - MYSQL_DATABASE_DEV=agendai
-      - MYSQL_HOST_DEV=mysql-dev
+  # app:
+  #   build: ./
+  #   ports:
+  #     - '3001:3001'
+  #   container_name: agendai-backend
+  #   environment:
+  #     - MYSQL_USER_DEV=agendai
+  #     - MYSQL_PASSWORD_DEV=agendai#password
+  #     - MYSQL_DATABASE_DEV=agendai
+  #     - MYSQL_HOST_DEV=mysql-dev
 
-      - MYSQL_USER_TEST=agendai-test
-      - MYSQL_PASSWORD_TEST=agendai#password#test
-      - MYSQL_DATABASE_TEST=agendai-test
-      - MYSQL_HOST_TEST=mysql-dev-test
-    volumes:
-      - .:/agendai-backend
-      - /agendai-backend/node_modules
-    restart: unless-stopped
-    depends_on:
-      - mysql-dev
+  #     - MYSQL_USER_TEST=agendai-test
+  #     - MYSQL_PASSWORD_TEST=agendai#password#test
+  #     - MYSQL_DATABASE_TEST=agendai-test
+  #     - MYSQL_HOST_TEST=mysql-dev-test
+  #   volumes:
+  #     - .:/agendai-backend
+  #     - /agendai-backend/node_modules
+  #   restart: unless-stopped
+  #   depends_on:
+  #     - mysql-dev
 
   mysql-dev:
     image: 'mysql:latest'
