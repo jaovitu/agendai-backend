@@ -1,12 +1,30 @@
-services:
-  mysql:
-    image: 'mysql:latest'
-    container_name: mysql-agendai
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: agendai
-      MYSQL_USER: agendai
-      MYSQL_PASSWORD: agendai#password
+version: '3.9'
 
+services:
+  app:
+    build: ./
+    ports:
+      - '3001:3001'
+    container_name: agendai-backend
+    environment:
+      - MYSQL_USER=agendai
+      - MYSQL_PASSWORD=agendai#password
+      - MYSQL_DATABASE=agendai
+      - MYSQL_HOST=mysql-dev
+    volumes:
+      - .:/agendai-backend
+      - /agendai-backend/node_modules
+    restart: unless-stopped
+    depends_on:
+      - mysql-dev
+
+  mysql-dev:
+    image: 'mysql:latest'
     ports:
       - '3306:3306'
+    container_name: mysql-agendai
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=agendai
+      - MYSQL_USER=agendai
+      - MYSQL_PASSWORD=agendai#password
