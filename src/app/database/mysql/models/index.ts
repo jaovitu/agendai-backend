@@ -1,6 +1,6 @@
 import { Sequelize } from 'sequelize';
-import { config } from '../config/database-config';
+import * as config from '../config/database-config';
 
-const devDB = new Sequelize(config.development);
+const devDB = new Sequelize(config);
 
-export { devDB };
+export default devDB;

@@ -10,6 +10,7 @@ COPY . .
 
 RUN npm run build
 RUN npx sequelize db:create
+RUN npx sequelize db:migrate
 
 EXPOSE 3001
 
