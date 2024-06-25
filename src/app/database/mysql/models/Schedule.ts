@@ -1,6 +1,7 @@
 import sequelize from 'sequelize';
 import { Model } from 'sequelize';
 import db from './index';
+import { Professional } from './Professional';
 
 class Schedule extends Model {
   declare id: number;
@@ -37,5 +38,8 @@ Schedule.init({
     }
   }
 }, { sequelize: db, tableName: 'schedules', underscored: false, timestamps: false });
+
+Schedule.belongsTo(Professional, { foreignKey: 'professionalID' });
+Professional.hasMany(Schedule, { foreignKey: 'professionalID' });
 
 export { Schedule };
