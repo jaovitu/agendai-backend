@@ -3,8 +3,15 @@ import { CreateProfessionalDTO } from '../../use-cases/create-professional/creat
 import { IProfessionalsRepository } from '../interfaces/i-professionals-repository';
 import db from '../../database/mysql/models/index';
 import { User } from '../../database/mysql/models/User';
+import { EditProfessionalDTO } from '../../use-cases/edit-professional/edit-professional-dto';
 
 class ProfessionalsRepository implements IProfessionalsRepository {
+  async findByID(id: number): Promise<Professional | null> {
+    const professional = await Professional.findByPk(id);
+
+    return professional;
+  }
+
   async create(professional: CreateProfessionalDTO): Promise<Professional | null> {
     const transaction = await db.transaction();
 
@@ -24,6 +31,26 @@ class ProfessionalsRepository implements IProfessionalsRepository {
     await transaction.commit();
 
     return createdProfessional;
+  }
+
+  async edit(professional: EditProfessionalDTO): Promise<Professional | null> {
+    const transaction = await db.transaction();
+
+    const professionalToUpdate = await Professional.findByPk(professional.id);
+    const userToUpdate = await User.findByPk(professionalToUpdate?.userID);
+
+    await userToUpdate?.update({
+      name: professional.name,
+      email: professional.email
+    }, { transaction });
+
+    const updatedProfessional = await professionalToUpdate?.update({
+      specialtyID: professional.specialtyID,
+    }, { transaction });
+
+    await transaction.commit();
+
+    return updatedProfessional as Professional;
   }
 }
 
