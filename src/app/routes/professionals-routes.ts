@@ -7,7 +7,7 @@ import { listProfessionalsController } from '../use-cases/list-professionals';
 
 const professionalsRoutes = Router();
 
-professionalsRoutes.get('/professionals', (request: Request, response: Response) => {
+professionalsRoutes.get('/professionals', authMiddleware, (request: Request, response: Response) => {
   return listProfessionalsController.handler(request, response);
 });
 
