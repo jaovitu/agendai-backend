@@ -4,8 +4,23 @@ import { IProfessionalsRepository } from '../interfaces/i-professionals-reposito
 import db from '../../database/mysql/models/index';
 import { User } from '../../database/mysql/models/User';
 import { EditProfessionalDTO } from '../../use-cases/edit-professional/edit-professional-dto';
+import { Specialty } from '../../database/mysql/models/Specialty';
 
 class ProfessionalsRepository implements IProfessionalsRepository {
+  async findAll(): Promise<Professional[] | null> {
+    const professionals = await Professional.findAll({
+      where: { isActive: true },
+
+      include: [{
+        model: Specialty,
+        as: 'specialty',
+        attributes: ['id', 'name']
+      }]
+    });
+
+    return professionals;
+  }
+
   async findByID(id: number): Promise<Professional | null> {
     const professional = await Professional.findByPk(id);
 
