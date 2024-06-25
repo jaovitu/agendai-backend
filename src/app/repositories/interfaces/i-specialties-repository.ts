@@ -3,6 +3,7 @@ import { CreateSpecialtyDTO } from '../../use-cases/create-specialty/create-spec
 
 interface ISpecialtiesRepository {
   create(specialty: CreateSpecialtyDTO): Promise<Specialty | null>
+  findAll(): Promise<Specialty[] | null>
 }
 
 export { ISpecialtiesRepository };

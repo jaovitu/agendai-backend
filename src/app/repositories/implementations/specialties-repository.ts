@@ -10,6 +10,14 @@ class SpecialtiesRepository implements ISpecialtiesRepository {
 
     return createdSpecialty;
   }
+
+  async findAll(): Promise<Specialty[] | null> {
+    const specialties = await Specialty.findAll({
+      where: { isActive: true }
+    });
+
+    return specialties;
+  }
 }
 
 export { SpecialtiesRepository };
