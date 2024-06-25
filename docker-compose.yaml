@@ -1,43 +1,29 @@
 version: '3.9'
 
 services:
-  # app:
-  #   build: ./
-  #   ports:
-  #     - '3001:3001'
-  #   container_name: agendai-backend
-  #   environment:
-  #     - MYSQL_USER_DEV=agendai
-  #     - MYSQL_PASSWORD_DEV=agendai#password
-  #     - MYSQL_DATABASE_DEV=agendai
-  #     - MYSQL_HOST_DEV=mysql-dev
-
-  #     - MYSQL_USER_TEST=agendai-test
-  #     - MYSQL_PASSWORD_TEST=agendai#password#test
-  #     - MYSQL_DATABASE_TEST=agendai-test
-  #     - MYSQL_HOST_TEST=mysql-dev-test
-  #   volumes:
-  #     - .:/agendai-backend
-  #     - /agendai-backend/node_modules
-  #   restart: unless-stopped
-  #   depends_on:
-  #     - mysql-dev
-  #     - redis
-
   mysql-dev:
-    image: 'mysql:latest'
+    image: mysql:latest
     ports:
       - '3306:3306'
     container_name: mysql-agendai
     environment:
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=agendai
-      - MYSQL_USER=agendai
-      - MYSQL_PASSWORD=agendai#password
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: agendai
+      MYSQL_USER: agendai
+      MYSQL_PASSWORD: agendai#password
+    restart: unless-stopped
+    networks:
+      - agendai-network
 
   redis:
-    image: 'redis:latest'
+    image: redis:latest
     ports:
       - '6379:6379'
     container_name: redis-agendai
     restart: unless-stopped
+    networks:
+      - agendai-network
+
+networks:
+  agendai-network:
+    driver: bridge
