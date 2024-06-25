@@ -6,6 +6,7 @@ import { errorMiddleware } from './app/middlewares/error-middleware';
 import { customLOG } from './app/utils/custom-log';
 import { usersRoutes } from './app/routes/users-routes';
 import { specialtiesRoutes } from './app/routes/specialties-routes';
+import { professionalsRoutes } from './app/routes/professionals-routes';
 
 dotenv.config();
 const app = express();
@@ -18,6 +19,7 @@ app.use(express.json());
 
 app.use(usersRoutes);
 app.use(specialtiesRoutes);
+app.use(professionalsRoutes);
 
 app.use(errorMiddleware);
 
