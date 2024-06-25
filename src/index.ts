@@ -8,6 +8,8 @@ import { usersRoutes } from './app/routes/users-routes';
 import { specialtiesRoutes } from './app/routes/specialties-routes';
 import { professionalsRoutes } from './app/routes/professionals-routes';
 import { schedulesRoutes } from './app/routes/schedules-routes';
+import { createAppointmentWorker } from './app/use-cases/create-appointment/create-appointment-worker';
+import { appointmentsRoutes } from './app/routes/appointments-routes';
 
 dotenv.config();
 const app = express();
@@ -22,6 +24,9 @@ app.use(usersRoutes);
 app.use(specialtiesRoutes);
 app.use(professionalsRoutes);
 app.use(schedulesRoutes);
+app.use(appointmentsRoutes);
+
+createAppointmentWorker();
 
 app.use(errorMiddleware);
 
