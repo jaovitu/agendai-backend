@@ -2,7 +2,7 @@ import sequelize from 'sequelize';
 import { Model } from 'sequelize';
 import db from './index';
 import { User } from './User';
-// import { Specialty } from './Specialty';
+import { Specialty } from './Specialty';
 
 class Professional extends Model {
   declare id: number;
@@ -64,9 +64,9 @@ Professional.init({
 }, { sequelize: db, tableName: 'professionals', underscored: false, timestamps: true });
 
 Professional.belongsTo(User, { foreignKey: 'userID', as: 'user' });
-// Professional.belongsTo(Specialty, { foreignKey: 'specialtyID', as: 'specialty' });
+Professional.belongsTo(Specialty, { foreignKey: 'specialtyID', as: 'specialty' });
 
 User.hasMany(Professional, { foreignKey: 'userID', as: 'professionals' });
-// Specialty.hasMany(Professional, { foreignKey: 'specialtyID', as: 'professionals' });
+Specialty.hasMany(Professional, { foreignKey: 'specialtyID', as: 'professionals' });
 
 export { Professional };
