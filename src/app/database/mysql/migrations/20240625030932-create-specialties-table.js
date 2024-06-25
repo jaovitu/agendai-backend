@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-
 'use strict';
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('users', {
+    await queryInterface.createTable('specialties', {
       id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -15,25 +14,6 @@ module.exports = {
 
       name: {
         type: Sequelize.STRING,
-        allowNull: false
-      },
-
-      email: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true,
-        validate: {
-          isEmail: true
-        }
-      },
-
-      password: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-
-      role: {
-        type: Sequelize.ENUM('ADMIN', 'PATIENT', 'PROFESSIONAL'),
         allowNull: false
       },
 
@@ -59,11 +39,9 @@ module.exports = {
         type: Sequelize.DATE
       }
     });
-
-    await queryInterface.addIndex('users', ['email']);
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('users');
+    await queryInterface.dropTable('specialties');
   }
 };
